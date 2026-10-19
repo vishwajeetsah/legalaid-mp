@@ -71,3 +71,7 @@ src/
 ```
 
 Routes follow TanStack file-based conventions — see `src/routes/README.md`.
+
+## Author
+
+**Vishwajeet Sah** — Para Legal Volunteer, District Legal Services Authority (DLSA), Sagar.
