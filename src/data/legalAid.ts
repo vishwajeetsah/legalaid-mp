@@ -1,0 +1,185 @@
+export type Lang = "en" | "hi";
+
+export type Bilingual = { en: string; hi: string };
+
+export const DISTRICTS: { id: string; label: Bilingual }[] = [
+  { id: "sagar", label: { en: "Sagar", hi: "सागर" } },
+];
+
+export const TEHSILS: { id: string; label: Bilingual }[] = [
+  { id: "sagar-city", label: { en: "Sagar City / District Headquarter", hi: "सागर शहर / जिला मुख्यालय" } },
+  { id: "khurai", label: { en: "Khurai", hi: "खुरई" } },
+  { id: "bina", label: { en: "Bina", hi: "बीना" } },
+  { id: "banda", label: { en: "Banda", hi: "बंडा" } },
+  { id: "deori", label: { en: "Deori", hi: "देवरी" } },
+  { id: "rahatgarh", label: { en: "Rahatgarh", hi: "राहतगढ़" } },
+];
+
+export type Office = {
+  name: Bilingual;
+  address: Bilingual;
+  phone: string;
+  hours: Bilingual;
+  mapsQuery: string;
+};
+
+export const OFFICES: Record<string, Office> = {
+  "sagar-city": {
+    name: { en: "District Legal Services Authority (DLSA), Sagar", hi: "जिला विधिक सेवा प्राधिकरण (डीएलएसए), सागर" },
+    address: {
+      en: "District & Sessions Court Premises, Sagar (M.P.) 470002",
+      hi: "जिला एवं सत्र न्यायालय परिसर, सागर (म.प्र.) 470002",
+    },
+    phone: "+91 7582 XXXXXX",
+    hours: { en: "10:00 AM – 5:00 PM (Mon–Sat, except holidays)", hi: "प्रातः 10:00 – सायं 5:00 (सोम–शनि, अवकाश छोड़कर)" },
+    mapsQuery: "District Court Sagar Madhya Pradesh",
+  },
+  khurai: {
+    name: { en: "Taluk Legal Services Committee (TLSC), Khurai", hi: "तालुका विधिक सेवा समिति (टीएलएससी), खुरई" },
+    address: { en: "Civil Court Complex, Khurai, District Sagar (M.P.)", hi: "सिविल न्यायालय परिसर, खुरई, जिला सागर (म.प्र.)" },
+    phone: "+91 7581 XXXXXX",
+    hours: { en: "10:00 AM – 5:00 PM (Mon–Sat, except holidays)", hi: "प्रातः 10:00 – सायं 5:00 (सोम–शनि, अवकाश छोड़कर)" },
+    mapsQuery: "Civil Court Khurai Sagar Madhya Pradesh",
+  },
+  bina: {
+    name: { en: "Taluk Legal Services Committee (TLSC), Bina", hi: "तालुका विधिक सेवा समिति (टीएलएससी), बीना" },
+    address: { en: "Court Complex, Bina-Etawa, District Sagar (M.P.)", hi: "न्यायालय परिसर, बीना-इटावा, जिला सागर (म.प्र.)" },
+    phone: "+91 7580 XXXXXX",
+    hours: { en: "10:00 AM – 5:00 PM (Mon–Sat, except holidays)", hi: "प्रातः 10:00 – सायं 5:00 (सोम–शनि, अवकाश छोड़कर)" },
+    mapsQuery: "Civil Court Bina Sagar Madhya Pradesh",
+  },
+  banda: {
+    name: { en: "Taluk Legal Services Committee (TLSC), Banda", hi: "तालुका विधिक सेवा समिति (टीएलएससी), बंडा" },
+    address: { en: "Civil Court Complex, Banda, District Sagar (M.P.)", hi: "सिविल न्यायालय परिसर, बंडा, जिला सागर (म.प्र.)" },
+    phone: "+91 7586 XXXXXX",
+    hours: { en: "10:00 AM – 5:00 PM (Mon–Sat, except holidays)", hi: "प्रातः 10:00 – सायं 5:00 (सोम–शनि, अवकाश छोड़कर)" },
+    mapsQuery: "Civil Court Banda Sagar Madhya Pradesh",
+  },
+  deori: {
+    name: { en: "Taluk Legal Services Committee (TLSC), Deori", hi: "तालुका विधिक सेवा समिति (टीएलएससी), देवरी" },
+    address: { en: "Civil Court Complex, Deori, District Sagar (M.P.)", hi: "सिविल न्यायालय परिसर, देवरी, जिला सागर (म.प्र.)" },
+    phone: "+91 7584 XXXXXX",
+    hours: { en: "10:00 AM – 5:00 PM (Mon–Sat, except holidays)", hi: "प्रातः 10:00 – सायं 5:00 (सोम–शनि, अवकाश छोड़कर)" },
+    mapsQuery: "Civil Court Deori Sagar Madhya Pradesh",
+  },
+  rahatgarh: {
+    name: { en: "Taluk Legal Services Committee (TLSC), Rahatgarh", hi: "तालुका विधिक सेवा समिति (टीएलएससी), राहतगढ़" },
+    address: { en: "Civil Court Complex, Rahatgarh, District Sagar (M.P.)", hi: "सिविल न्यायालय परिसर, राहतगढ़, जिला सागर (म.प्र.)" },
+    phone: "+91 7585 XXXXXX",
+    hours: { en: "10:00 AM – 5:00 PM (Mon–Sat, except holidays)", hi: "प्रातः 10:00 – सायं 5:00 (सोम–शनि, अवकाश छोड़कर)" },
+    mapsQuery: "Civil Court Rahatgarh Sagar Madhya Pradesh",
+  },
+};
+
+/**
+ * Rules engine data for Madhya Pradesh legal aid eligibility.
+ * Protected categories qualify irrespective of income (income cap 0 = not applicable).
+ * General category qualifies below the state income cap.
+ */
+export type CategoryRule = {
+  id: string;
+  label: Bilingual;
+  section: string;
+  reason: Bilingual;
+  incomeCapApplies: boolean;
+  documents: string[];
+};
+
+export const RULES: {
+  state: string;
+  generalIncomeCap: number;
+  categories: CategoryRule[];
+} = {
+  state: "Madhya Pradesh",
+  generalIncomeCap: 200000,
+  categories: [
+    {
+      id: "woman",
+      label: { en: "A woman", hi: "महिला" },
+      section: "Section 12(c)",
+      reason: {
+        en: "Eligible as per Section 12(c) of the Legal Services Authorities Act, 1987 — women are entitled to free legal aid irrespective of income.",
+        hi: "विधिक सेवा प्राधिकरण अधिनियम, 1987 की धारा 12(ग) के अनुसार पात्र — महिलाओं को आय की परवाह किए बिना नि:शुल्क विधिक सहायता का अधिकार है।",
+      },
+      incomeCapApplies: false,
+      documents: ["identity"],
+    },
+    {
+      id: "child",
+      label: { en: "A child (under 18 years)", hi: "बालक/बालिका (18 वर्ष से कम)" },
+      section: "Section 12(c)",
+      reason: {
+        en: "Eligible as per Section 12(c) — children are entitled to free legal aid irrespective of income.",
+        hi: "धारा 12(ग) के अनुसार पात्र — बच्चों को आय की परवाह किए बिना नि:शुल्क विधिक सहायता का अधिकार है।",
+      },
+      incomeCapApplies: false,
+      documents: ["age"],
+    },
+    {
+      id: "scst",
+      label: { en: "Member of SC / ST community", hi: "अनुसूचित जाति / अनुसूचित जनजाति सदस्य" },
+      section: "Section 12(a)",
+      reason: {
+        en: "Eligible as per Section 12(a) — members of Scheduled Castes and Scheduled Tribes are entitled to free legal aid irrespective of income.",
+        hi: "धारा 12(क) के अनुसार पात्र — अनुसूचित जाति एवं अनुसूचित जनजाति के सदस्यों को आय की परवाह किए बिना नि:शुल्क विधिक सहायता का अधिकार है।",
+      },
+      incomeCapApplies: false,
+      documents: ["caste"],
+    },
+    {
+      id: "workman",
+      label: { en: "Industrial workman", hi: "औद्योगिक कर्मकार" },
+      section: "Section 12(f)",
+      reason: {
+        en: "Eligible as per Section 12(f) — industrial workmen are entitled to free legal aid irrespective of income.",
+        hi: "धारा 12(च) के अनुसार पात्र — औद्योगिक कर्मकारों को आय की परवाह किए बिना नि:शुल्क विधिक सहायता का अधिकार है।",
+      },
+      incomeCapApplies: false,
+      documents: ["employment"],
+    },
+    {
+      id: "custody",
+      label: { en: "Currently in custody", hi: "वर्तमान में अभिरक्षा में" },
+      section: "Section 12(g)",
+      reason: {
+        en: "Eligible as per Section 12(g) — persons in custody are entitled to free legal aid irrespective of income.",
+        hi: "धारा 12(छ) के अनुसार पात्र — अभिरक्षा में रखे गए व्यक्ति आय की परवाह किए बिना नि:शुल्क विधिक सहायता के हकदार हैं।",
+      },
+      incomeCapApplies: false,
+      documents: ["custody"],
+    },
+  ],
+};
+
+export const DISPUTES: { id: string; label: Bilingual }[] = [
+  { id: "civil", label: { en: "Civil", hi: "सिविल" } },
+  { id: "criminal", label: { en: "Criminal", hi: "आपराधिक" } },
+  { id: "family", label: { en: "Family / Matrimonial", hi: "पारिवारिक / वैवाहिक" } },
+  { id: "revenue", label: { en: "Revenue", hi: "राजस्व" } },
+  { id: "labour", label: { en: "Labour", hi: "श्रम" } },
+  { id: "other", label: { en: "Other", hi: "अन्य" } },
+];
+
+export const DISPUTE_DOCUMENTS: Record<string, string[]> = {
+  civil: ["property"],
+  criminal: ["fir"],
+  family: ["marriage"],
+  revenue: ["revenue"],
+  labour: ["employment"],
+  other: ["dispute"],
+};
+
+export const DOCUMENTS: Record<string, Bilingual> = {
+  identity: { en: "Identity proof (Aadhaar / Voter ID / Ration card)", hi: "पहचान प्रमाण (आधार / मतदाता पहचान पत्र / राशन कार्ड)" },
+  income: { en: "Income self-declaration affidavit (annual family income)", hi: "आय स्व-घोषणा शपथ पत्र (वार्षिक पारिवारिक आय)" },
+  caste: { en: "Caste certificate (SC / ST)", hi: "जाति प्रमाण पत्र (अजा / अजजा)" },
+  age: { en: "Age proof (birth certificate / school certificate)", hi: "आयु प्रमाण (जन्म प्रमाण पत्र / विद्यालय प्रमाण पत्र)" },
+  employment: { en: "Employment proof / labour card", hi: "रोजगार प्रमाण / श्रमिक कार्ड" },
+  custody: { en: "Custody details (jail / police station and case number)", hi: "अभिरक्षा विवरण (जेल / थाना एवं प्रकरण क्रमांक)" },
+  fir: { en: "Copy of FIR / charge sheet / court notice", hi: "एफ.आई.आर. / आरोप पत्र / न्यायालय सूचना की प्रति" },
+  property: { en: "Property or agreement documents related to the dispute", hi: "विवाद से संबंधित संपत्ति या अनुबंध दस्तावेज" },
+  marriage: { en: "Marriage proof and any existing court order", hi: "विवाह प्रमाण एवं कोई विद्यमान न्यायालय आदेश" },
+  revenue: { en: "Khasra / Khatauni or revenue records", hi: "खसरा / खतौनी अथवा राजस्व अभिलेख" },
+  dispute: { en: "Any documents related to your dispute", hi: "आपके विवाद से संबंधित कोई भी दस्तावेज" },
+  photo: { en: "Two passport-size photographs", hi: "दो पासपोर्ट आकार के फोटो" },
+};
