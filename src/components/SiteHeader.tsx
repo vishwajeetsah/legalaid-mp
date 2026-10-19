@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Moon, Sun } from "lucide-react";
-import nalsaLogo from "@/assets/nalsa-logo.png.asset.json";
+import nalsaLogoUrl from "@/assets/nalsa-logo.png";
 import { useLang } from "@/lib/i18n";
 import { useTheme } from "@/lib/theme";
 
@@ -13,7 +13,7 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-between gap-3 px-4 py-3">
         <Link to="/" className="flex items-center gap-3 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none">
           <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-card shadow-sm ring-1 ring-border transition-transform duration-200 hover:scale-105">
-            <img src={nalsaLogo.url} alt="NALSA — Access to Justice for All" className="h-8 w-8 object-contain" />
+            <img src={nalsaLogoUrl} alt="NALSA — Access to Justice for All" className="h-8 w-8 object-contain" />
           </span>
           <span>
             <span className="block font-serif text-lg leading-tight font-bold">{t("appName")}</span>
