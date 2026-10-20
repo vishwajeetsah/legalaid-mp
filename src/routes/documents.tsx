@@ -253,7 +253,10 @@ function Documents() {
 
               <div className="mt-10 border-t border-neutral-300 pt-3 text-center text-xs text-neutral-600">
                 <p>
-                  Designed &amp; Developed by{" "}
+                  Designed &amp; Developed by ·{" "}
+                  <a href="tel:+917771074412" aria-label="Call Vishwajeet Sah">
+                    📞
+                  </a>{" "}
                   <a
                     href="https://www.linkedin.com/in/vishwajeetsah"
                     target="_blank"
@@ -261,19 +264,6 @@ function Documents() {
                     className="font-semibold text-neutral-800 underline"
                   >
                     Vishwajeet Sah
-                  </a>{" "}
-                  · 📞{" "}
-                  <a href="tel:+917771074412" className="underline">
-                    Call
-                  </a>{" "}
-                  ·{" "}
-                  <a
-                    href="https://www.linkedin.com/in/vishwajeetsah"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="underline"
-                  >
-                    LinkedIn
                   </a>
                 </p>
               </div>
