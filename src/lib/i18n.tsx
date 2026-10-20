@@ -115,6 +115,30 @@ const dict = {
     hi: "आवेदक निःशुल्क विधिक सहायता हेतु पात्रता सत्यापन के लिए उपरोक्त दस्तावेज़ों की मूल प्रतियाँ विधिक सेवा प्राधिकरण कार्यालय में साथ लेकर जाएगा/जाएगी।",
   },
 
+  guideTitle: { en: "Know your rights", hi: "अपने अधिकार जानें" },
+  guideIntro: {
+    en: "Free legal aid is a right, not a favour. Here is, in simple words, who can get it, what it includes, what happens after you apply, and how to get help even before an arrest.",
+    hi: "नि:शुल्क विधिक सहायता एक अधिकार है, कोई कृपा नहीं। यहाँ सरल शब्दों में जानें — कौन इसे पा सकता है, इसमें क्या-क्या शामिल है, आवेदन के बाद क्या होता है, और गिरफ्तारी से पहले भी सहायता कैसे पाएं।",
+  },
+  toGuide: { en: "Know your rights", hi: "अपने अधिकार जानें" },
+  secEntitled: { en: "Who can get free legal aid", hi: "नि:शुल्क विधिक सहायता कौन पा सकता है" },
+  entitledIntro: {
+    en: "Under Section 12 of the Legal Services Authorities Act, 1987, the following persons are entitled to free legal aid whatever their income:",
+    hi: "विधिक सेवा प्राधिकरण अधिनियम, 1987 की धारा 12 के अंतर्गत निम्नलिखित व्यक्ति आय की परवाह किए बिना नि:शुल्क विधिक सहायता के हकदार हैं:",
+  },
+  entitledIncome: {
+    en: "Any other person whose annual family income is below the limit prescribed by their State Government (Section 12(h))",
+    hi: "कोई भी अन्य व्यक्ति जिसकी वार्षिक पारिवारिक आय उसकी राज्य सरकार द्वारा निर्धारित सीमा से कम है (धारा 12(ज))",
+  },
+  secServices: { en: "What you get — completely free", hi: "आपको क्या मिलेगा — पूर्णतः नि:शुल्क" },
+  secProcedure: { en: "What happens after you apply", hi: "आवेदन के बाद क्या होता है" },
+  secPreArrest: { en: "Help before arrest — do not wait", hi: "गिरफ्तारी से पहले सहायता — प्रतीक्षा न करें" },
+  preArrestCardTitle: { en: "Got a police notice? Fear arrest?", hi: "पुलिस नोटिस मिला है? गिरफ्तारी की आशंका है?" },
+  preArrestCardBody: {
+    en: "You can get free legal help even before an arrest. Tap to see how, and what details to keep ready.",
+    hi: "गिरफ्तारी से पहले भी आप नि:शुल्क विधिक सहायता पा सकते हैं। कैसे, और कौन से विवरण तैयार रखें — जानने के लिए दबाएं।",
+  },
+
   officeTitle: { en: "Where to submit your application", hi: "आवेदन कहाँ जमा करें" },
   hoursLabel: { en: "Working hours", hi: "कार्य समय" },
   phoneOffice: { en: "Phone", hi: "दूरभाष" },

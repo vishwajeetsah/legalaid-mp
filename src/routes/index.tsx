@@ -1,5 +1,5 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { ArrowRight, ClipboardCheck, MapPin, FileDown, ScrollText } from "lucide-react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { ArrowRight, BookOpenText, ClipboardCheck, MapPin, FileDown, ScrollText, Siren } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { SpeakButton } from "@/components/SpeakButton";
 import { useLang } from "@/lib/i18n";
@@ -73,6 +73,31 @@ function Welcome() {
           <ArrowRight className="h-5 w-5" aria-hidden="true" />
         </button>
       </section>
+
+      <Link
+        to="/guide"
+        hash="pre-arrest"
+        className="card-enter mt-6 flex items-start gap-4 rounded-lg border-2 border-accent/60 bg-accent/10 p-6 shadow-sm [animation-delay:140ms]"
+      >
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent">
+          <Siren className="h-5 w-5" aria-hidden="true" />
+        </span>
+        <span>
+          <span className="block font-serif text-xl font-bold text-primary">{t("preArrestCardTitle")}</span>
+          <span className="mt-1 block text-base text-foreground/90">{t("preArrestCardBody")}</span>
+        </span>
+      </Link>
+
+      <Link
+        to="/guide"
+        className="card-enter mt-4 flex items-center gap-4 rounded-lg border border-border bg-card p-6 shadow-sm [animation-delay:200ms]"
+      >
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <BookOpenText className="h-5 w-5" aria-hidden="true" />
+        </span>
+        <span className="font-serif text-xl font-bold text-primary">{t("toGuide")}</span>
+        <ArrowRight className="ml-auto h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+      </Link>
     </PageShell>
   );
 }

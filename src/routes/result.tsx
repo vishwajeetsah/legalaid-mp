@@ -1,11 +1,12 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo } from "react";
-import { CheckCircle2, Info, Phone, Scale, Handshake, ArrowRight } from "lucide-react";
+import { CheckCircle2, Gift, Info, Phone, Scale, Handshake, ArrowRight } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { SpeakButton } from "@/components/SpeakButton";
 import { useLang } from "@/lib/i18n";
 import { useAnswers } from "@/lib/answers-store";
 import { evaluate } from "@/lib/eligibility";
+import { FREE_SERVICES } from "@/data/guide";
 
 export const Route = createFileRoute("/result")({
   head: () => ({
@@ -69,6 +70,25 @@ function Result() {
         </div>
       </section>
 
+      {verdict.eligible && (
+        <section className="card-enter mt-6 rounded-lg border border-border bg-card p-6 shadow-sm">
+          <h2 className="flex items-center gap-3 font-serif text-xl font-bold text-primary">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <Gift className="h-5 w-5" aria-hidden="true" />
+            </span>
+            {t("secServices")}
+          </h2>
+          <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+            {FREE_SERVICES.map((s, i) => (
+              <li key={i} className="flex gap-2 rounded-lg border border-border p-3 text-base">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-success" aria-hidden="true" />
+                <span className="font-medium">{b(s.title)}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {verdict.eligible ? (
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
           <Link
@@ -122,9 +142,12 @@ function Result() {
         </section>
       )}
 
-      <div className="mt-6">
+      <div className="mt-6 flex flex-wrap items-center gap-5">
         <Link to="/eligibility" className="text-sm font-semibold text-primary underline">
           {t("back")}
+        </Link>
+        <Link to="/guide" className="text-sm font-semibold text-primary underline">
+          {t("toGuide")}
         </Link>
       </div>
     </PageShell>

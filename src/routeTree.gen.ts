@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as EligibilityRouteImport } from './routes/eligibility'
+import { Route as GuideRouteImport } from './routes/guide'
 import { Route as OfficeRouteImport } from './routes/office'
 import { Route as ResultRouteImport } from './routes/result'
 
@@ -30,6 +31,11 @@ const EligibilityRoute = EligibilityRouteImport.update({
   path: '/eligibility',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuideRoute = GuideRouteImport.update({
+  id: '/guide',
+  path: '/guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OfficeRoute = OfficeRouteImport.update({
   id: '/office',
   path: '/office',
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/documents': typeof DocumentsRoute
   '/eligibility': typeof EligibilityRoute
+  '/guide': typeof GuideRoute
   '/office': typeof OfficeRoute
   '/result': typeof ResultRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/documents': typeof DocumentsRoute
   '/eligibility': typeof EligibilityRoute
+  '/guide': typeof GuideRoute
   '/office': typeof OfficeRoute
   '/result': typeof ResultRoute
 }
@@ -60,21 +68,31 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/documents': typeof DocumentsRoute
   '/eligibility': typeof EligibilityRoute
+  '/guide': typeof GuideRoute
   '/office': typeof OfficeRoute
   '/result': typeof ResultRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/documents' | '/eligibility' | '/office' | '/result'
+  fullPaths:
+    '/' | '/documents' | '/eligibility' | '/guide' | '/office' | '/result'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/documents' | '/eligibility' | '/office' | '/result'
-  id: '__root__' | '/' | '/documents' | '/eligibility' | '/office' | '/result'
+  to: '/' | '/documents' | '/eligibility' | '/guide' | '/office' | '/result'
+  id:
+    | '__root__'
+    | '/'
+    | '/documents'
+    | '/eligibility'
+    | '/guide'
+    | '/office'
+    | '/result'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DocumentsRoute: typeof DocumentsRoute
   EligibilityRoute: typeof EligibilityRoute
+  GuideRoute: typeof GuideRoute
   OfficeRoute: typeof OfficeRoute
   ResultRoute: typeof ResultRoute
 }
@@ -102,6 +120,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EligibilityRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guide': {
+      id: '/guide'
+      path: '/guide'
+      fullPath: '/guide'
+      preLoaderRoute: typeof GuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/office': {
       id: '/office'
       path: '/office'
@@ -123,6 +148,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DocumentsRoute: DocumentsRoute,
   EligibilityRoute: EligibilityRoute,
+  GuideRoute: GuideRoute,
   OfficeRoute: OfficeRoute,
   ResultRoute: ResultRoute,
 }

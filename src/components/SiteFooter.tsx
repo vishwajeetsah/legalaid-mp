@@ -1,4 +1,5 @@
-import { ExternalLink, Phone } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { BookOpenText, ExternalLink, Phone } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 
 export function SiteFooter() {
@@ -9,6 +10,9 @@ export function SiteFooter() {
       <div className="mx-auto max-w-4xl px-4 py-8">
         <p className="max-w-2xl text-base font-semibold leading-relaxed">{t("footerMain")}</p>
         <div className="mt-5 flex flex-wrap gap-2">
+          <Link className="footer-badge" to="/guide">
+            <BookOpenText aria-hidden="true" /> {t("toGuide")}
+          </Link>
           <a className="footer-badge" href="tel:15100">
             <Phone aria-hidden="true" /> {t("footerHelpline")}
           </a>

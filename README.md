@@ -36,6 +36,11 @@ order:
 - **Office finder** (`/office`) — your district's DLSA (District & Sessions Court
   premises) with directions; detailed office records for Sagar district (DLSA
   Sagar and the TLSCs at Khurai, Bina, Banda, Deori, Rahatgarh)
+- **Know your rights guide** (`/guide`) — in plain language: who is entitled
+  under Section 12 (all categories, including trafficking victims, persons with
+  disability and disaster/atrocity victims), what free legal aid actually
+  includes, what happens after you apply, and how to get legal help *before* an
+  arrest (police notice / apprehended arrest)
 - **Bilingual UI** — English and Hindi (हिंदी), with Noto Sans/Serif Devanagari fonts
 - **Voice support** — text-to-speech read-aloud and a voice assistant for
   low-literacy users

@@ -152,6 +152,39 @@ export const RULES: {
       incomeCapApplies: false,
       documents: ["custody"],
     },
+    {
+      id: "trafficking",
+      label: { en: "Victim of human trafficking or begar (forced labour)", hi: "मानव तस्करी या बेगार (जबरन श्रम) के शिकार" },
+      section: "Section 12(b)",
+      reason: {
+        en: "Eligible as per Section 12(b) — victims of human trafficking or begar are entitled to free legal aid irrespective of income.",
+        hi: "धारा 12(ख) के अनुसार पात्र — मानव तस्करी या बेगार के शिकार व्यक्ति आय की परवाह किए बिना नि:शुल्क विधिक सहायता के हकदार हैं।",
+      },
+      incomeCapApplies: false,
+      documents: ["fir"],
+    },
+    {
+      id: "disability",
+      label: { en: "A person with disability or mental illness", hi: "दिव्यांग या मानसिक रूप से अस्वस्थ व्यक्ति" },
+      section: "Section 12(d)",
+      reason: {
+        en: "Eligible as per Section 12(d) — persons with disability or mental illness are entitled to free legal aid irrespective of income.",
+        hi: "धारा 12(घ) के अनुसार पात्र — दिव्यांग या मानसिक रूप से अस्वस्थ व्यक्ति आय की परवाह किए बिना नि:शुल्क विधिक सहायता के हकदार हैं।",
+      },
+      incomeCapApplies: false,
+      documents: ["disability"],
+    },
+    {
+      id: "disaster",
+      label: { en: "Victim of a disaster, caste atrocity or violence", hi: "आपदा, जातिगत अत्याचार या हिंसा के शिकार" },
+      section: "Section 12(e)",
+      reason: {
+        en: "Eligible as per Section 12(e) — victims of mass disaster, ethnic violence, caste atrocity, flood, drought, earthquake or industrial disaster are entitled to free legal aid irrespective of income.",
+        hi: "धारा 12(ङ) के अनुसार पात्र — सामूहिक आपदा, जातीय हिंसा, जातिगत अत्याचार, बाढ़, सूखा, भूकंप या औद्योगिक आपदा के शिकार व्यक्ति आय की परवाह किए बिना नि:शुल्क विधिक सहायता के हकदार हैं।",
+      },
+      incomeCapApplies: false,
+      documents: ["dispute"],
+    },
   ],
 };
 
@@ -180,6 +213,7 @@ export const DOCUMENTS: Record<string, Bilingual> = {
   age: { en: "Age proof (birth certificate / school certificate)", hi: "आयु प्रमाण (जन्म प्रमाण पत्र / विद्यालय प्रमाण पत्र)" },
   employment: { en: "Employment proof / labour card", hi: "रोजगार प्रमाण / श्रमिक कार्ड" },
   custody: { en: "Custody details (jail / police station and case number)", hi: "अभिरक्षा विवरण (जेल / थाना एवं प्रकरण क्रमांक)" },
+  disability: { en: "Disability certificate / UDID card", hi: "दिव्यांगता प्रमाण पत्र / यूडीआईडी कार्ड" },
   fir: { en: "Copy of FIR / charge sheet / court notice", hi: "एफ.आई.आर. / आरोप पत्र / न्यायालय सूचना की प्रति" },
   property: { en: "Property or agreement documents related to the dispute", hi: "विवाद से संबंधित संपत्ति या अनुबंध दस्तावेज" },
   marriage: { en: "Marriage proof and any existing court order", hi: "विवाह प्रमाण एवं कोई विद्यमान न्यायालय आदेश" },
