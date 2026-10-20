@@ -250,6 +250,33 @@ function Documents() {
                 <span>{lang === "hi" ? "दिनांक: ____________" : "Date: ____________"}</span>
                 <span>{lang === "hi" ? "आवेदक के हस्ताक्षर / अंगूठा निशान" : "Signature / Thumb impression of applicant"}</span>
               </div>
+
+              <div className="mt-10 border-t border-neutral-300 pt-3 text-center text-xs text-neutral-600">
+                <p>
+                  Designed &amp; Developed by{" "}
+                  <a
+                    href="https://www.linkedin.com/in/vishwajeetsah"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-semibold text-neutral-800 underline"
+                  >
+                    Vishwajeet Sah
+                  </a>{" "}
+                  · 📞{" "}
+                  <a href="tel:+917771074412" className="underline">
+                    +91 77710 74412
+                  </a>{" "}
+                  ·{" "}
+                  <a
+                    href="https://www.linkedin.com/in/vishwajeetsah"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline"
+                  >
+                    www.linkedin.com/in/vishwajeetsah
+                  </a>
+                </p>
+              </div>
             </div>
 
             <div className="flex justify-end gap-3 border-t border-border px-5 py-4 print:hidden">
