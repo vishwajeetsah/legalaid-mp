@@ -264,7 +264,7 @@ function Documents() {
                   </a>{" "}
                   · 📞{" "}
                   <a href="tel:+917771074412" className="underline">
-                    +91 77710 74412
+                    Call
                   </a>{" "}
                   ·{" "}
                   <a
@@ -273,7 +273,7 @@ function Documents() {
                     rel="noreferrer"
                     className="underline"
                   >
-                    www.linkedin.com/in/vishwajeetsah
+                    LinkedIn
                   </a>
                 </p>
               </div>
