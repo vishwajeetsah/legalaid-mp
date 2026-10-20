@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Answers } from "@/lib/eligibility";
 
-const STORAGE_KEY = "legalaid-answers";
+const STORAGE_KEY = "legalaid-answers-v2";
 
 const initial: Answers = {
-  district: "sagar",
-  tehsil: "",
+  stateCode: "",
+  district: "",
+  taluk: "",
   categories: [],
   incomeUnderCap: null,
   dispute: "",

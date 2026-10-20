@@ -2,18 +2,23 @@ export type Lang = "en" | "hi";
 
 export type Bilingual = { en: string; hi: string };
 
-export const DISTRICTS: { id: string; label: Bilingual }[] = [
-  { id: "sagar", label: { en: "Sagar", hi: "सागर" } },
-];
+/**
+ * Detailed office records exist for Sagar district (Madhya Pradesh), keyed by
+ * office id. SAGAR_TALUK_OFFICE maps a Sagar taluk name (LGD) to an office id.
+ * Everywhere else in India the app falls back to the district's DLSA, which
+ * sits in the District & Sessions Court premises.
+ */
+export const SAGAR_DISTRICT_CODE = "425";
 
-export const TEHSILS: { id: string; label: Bilingual }[] = [
-  { id: "sagar-city", label: { en: "Sagar City / District Headquarter", hi: "सागर शहर / जिला मुख्यालय" } },
-  { id: "khurai", label: { en: "Khurai", hi: "खुरई" } },
-  { id: "bina", label: { en: "Bina", hi: "बीना" } },
-  { id: "banda", label: { en: "Banda", hi: "बंडा" } },
-  { id: "deori", label: { en: "Deori", hi: "देवरी" } },
-  { id: "rahatgarh", label: { en: "Rahatgarh", hi: "राहतगढ़" } },
-];
+export const SAGAR_TALUK_OFFICE: Record<string, string> = {
+  sagar: "sagar-city",
+  "sagar nagar": "sagar-city",
+  khurai: "khurai",
+  bina: "bina",
+  banda: "banda",
+  deori: "deori",
+  rahatgarh: "rahatgarh",
+};
 
 export type Office = {
   name: Bilingual;
@@ -72,9 +77,12 @@ export const OFFICES: Record<string, Office> = {
 };
 
 /**
- * Rules engine data for Madhya Pradesh legal aid eligibility.
- * Protected categories qualify irrespective of income (income cap 0 = not applicable).
- * General category qualifies below the state income cap.
+ * Rules engine data for legal aid eligibility under the Legal Services
+ * Authorities Act, 1987 (all-India). Protected categories under Section 12
+ * qualify irrespective of income. Everyone else qualifies under Section 12(h)
+ * when annual family income is below the limit prescribed by their State
+ * Government (limits vary by state, so the app asks a yes/no question rather
+ * than testing one national figure).
  */
 export type CategoryRule = {
   id: string;
@@ -86,12 +94,8 @@ export type CategoryRule = {
 };
 
 export const RULES: {
-  state: string;
-  generalIncomeCap: number;
   categories: CategoryRule[];
 } = {
-  state: "Madhya Pradesh",
-  generalIncomeCap: 200000,
   categories: [
     {
       id: "woman",

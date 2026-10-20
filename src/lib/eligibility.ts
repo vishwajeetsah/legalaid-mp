@@ -1,8 +1,9 @@
 import { RULES, DISPUTE_DOCUMENTS, type Bilingual } from "@/data/legalAid";
 
 export type Answers = {
+  stateCode: string;
   district: string;
-  tehsil: string;
+  taluk: string;
   categories: string[];
   incomeUnderCap: boolean | null;
   dispute: string;
@@ -35,8 +36,8 @@ export function evaluate(answers: Answers): Verdict {
       sections: ["Section 12(h)"],
       reasons: [
         {
-          en: `Eligible under the Madhya Pradesh rules because your annual family income is below ₹${RULES.generalIncomeCap.toLocaleString("en-IN")} — the income limit prescribed by the State Government under Section 12(h).`,
-          hi: `मध्य प्रदेश नियमों के अंतर्गत पात्र, क्योंकि आपकी वार्षिक पारिवारिक आय ₹${RULES.generalIncomeCap.toLocaleString("en-IN")} से कम है — यह धारा 12(ज) के अंतर्गत राज्य शासन द्वारा निर्धारित आय सीमा है।`,
+          en: "Eligible because your annual family income is below the limit prescribed by your State Government under Section 12(h) of the Legal Services Authorities Act, 1987.",
+          hi: "पात्र, क्योंकि आपकी वार्षिक पारिवारिक आय विधिक सेवा प्राधिकरण अधिनियम, 1987 की धारा 12(ज) के अंतर्गत आपकी राज्य सरकार द्वारा निर्धारित सीमा से कम है।",
         },
       ],
     };
@@ -47,8 +48,8 @@ export function evaluate(answers: Answers): Verdict {
     sections: [],
     reasons: [
       {
-        en: `You do not fall under a protected category and your annual family income is ₹${RULES.generalIncomeCap.toLocaleString("en-IN")} or above, which is the income limit for free legal aid in Madhya Pradesh.`,
-        hi: `आप किसी संरक्षित श्रेणी में नहीं आते और आपकी वार्षिक पारिवारिक आय ₹${RULES.generalIncomeCap.toLocaleString("en-IN")} या उससे अधिक है, जो मध्य प्रदेश में नि:शुल्क विधिक सहायता की आय सीमा है।`,
+        en: "You do not fall under a protected category, and your annual family income is above the limit prescribed by your State Government under Section 12(h) of the Legal Services Authorities Act, 1987.",
+        hi: "आप किसी संरक्षित श्रेणी में नहीं आते और आपकी वार्षिक पारिवारिक आय विधिक सेवा प्राधिकरण अधिनियम, 1987 की धारा 12(ज) के अंतर्गत आपकी राज्य सरकार द्वारा निर्धारित सीमा से अधिक है।",
       },
     ],
   };

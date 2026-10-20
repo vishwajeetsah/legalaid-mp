@@ -12,7 +12,7 @@ export function SiteFooter() {
           <a className="footer-badge" href="tel:15100">
             <Phone aria-hidden="true" /> {t("footerHelpline")}
           </a>
-          <a className="footer-badge" href="https://madhyapradesh.nalsa.gov.in/" target="_blank" rel="noreferrer">
+          <a className="footer-badge" href="https://nalsa.gov.in/" target="_blank" rel="noreferrer">
             {t("footerGuidelines")} <ExternalLink aria-hidden="true" />
           </a>
           <span className="footer-badge">{t("footerPrivacy")}</span>

@@ -81,16 +81,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "LegalAid MP — Free Legal Aid Helper, Sagar" },
+      { title: "LegalAid India — Free Legal Aid Helper" },
       {
         name: "description",
         content:
-          "Check your eligibility for free legal aid in Madhya Pradesh, get your document checklist and find the DLSA or TLSC office in Sagar district.",
+          "Check your eligibility for free legal aid anywhere in India, get your document checklist, download your application and find your district DLSA office.",
       },
-      { property: "og:title", content: "LegalAid MP — Free Legal Aid Helper, Sagar" },
+      { property: "og:title", content: "LegalAid India — Free Legal Aid Helper" },
       {
         property: "og:description",
-        content: "Free legal aid eligibility check, document checklist and office finder for Sagar district, Madhya Pradesh.",
+        content: "Free legal aid eligibility check, document checklist, printable application and DLSA office finder for every district in India.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

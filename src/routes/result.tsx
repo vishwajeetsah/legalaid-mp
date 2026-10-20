@@ -10,12 +10,12 @@ import { evaluate } from "@/lib/eligibility";
 export const Route = createFileRoute("/result")({
   head: () => ({
     meta: [
-      { title: "Your Eligibility Result — LegalAid MP" },
+      { title: "Your Eligibility Result — LegalAid India" },
       {
         name: "description",
-        content: "See whether you qualify for free legal aid in Madhya Pradesh, with the exact legal provision behind the decision.",
+        content: "See whether you qualify for free legal aid anywhere in India, with the exact legal provision behind the decision.",
       },
-      { property: "og:title", content: "Your Eligibility Result — LegalAid MP" },
+      { property: "og:title", content: "Your Eligibility Result — LegalAid India" },
       { property: "og:description", content: "Your free legal aid verdict with the exact section of the Legal Services Authorities Act, 1987." },
     ],
   }),
@@ -29,8 +29,10 @@ function Result() {
   const verdict = useMemo(() => evaluate(answers), [answers]);
 
   useEffect(() => {
-    if (hydrated && !answers.tehsil) navigate({ to: "/" });
-  }, [hydrated, answers.tehsil, navigate]);
+    if (hydrated && answers.categories.length === 0 && answers.incomeUnderCap === null && !answers.dispute) {
+      navigate({ to: "/" });
+    }
+  }, [hydrated, answers.categories.length, answers.incomeUnderCap, answers.dispute, navigate]);
 
   const spoken = `${verdict.eligible ? t("eligibleTitle") : t("notEligibleTitle")}. ${verdict.reasons.map(b).join(" ")}`;
 

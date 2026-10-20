@@ -1,25 +1,22 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArrowRight, ScrollText } from "lucide-react";
+import { ArrowRight, ClipboardCheck, MapPin, FileDown, ScrollText } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { SpeakButton } from "@/components/SpeakButton";
 import { useLang } from "@/lib/i18n";
-import { useAnswers } from "@/lib/answers-store";
-import { DISTRICTS, TEHSILS } from "@/data/legalAid";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "LegalAid MP — Free Legal Aid Eligibility Check, Sagar District" },
+      { title: "LegalAid India — Free Legal Aid Eligibility Check" },
       {
         name: "description",
         content:
-          "Start your free legal aid check for Madhya Pradesh. Choose your district and tehsil in Sagar and see if you qualify under the Legal Services Authorities Act, 1987.",
+          "Check if you qualify for free legal aid anywhere in India under the Legal Services Authorities Act, 1987. Answer three simple questions, add your district, and download a ready application for your DLSA office.",
       },
-      { property: "og:title", content: "LegalAid MP — Free Legal Aid Eligibility Check, Sagar District" },
+      { property: "og:title", content: "LegalAid India — Free Legal Aid Eligibility Check" },
       {
         property: "og:description",
-        content: "Choose your district and tehsil in Sagar and check your free legal aid eligibility in minutes.",
+        content: "Three simple questions to check your free legal aid eligibility anywhere in India — then download your application.",
       },
     ],
   }),
@@ -27,18 +24,14 @@ export const Route = createFileRoute("/")({
 });
 
 function Welcome() {
-  const { t, b, lang } = useLang();
-  const { answers, update } = useAnswers();
+  const { t, lang } = useLang();
   const navigate = useNavigate();
-  const [error, setError] = useState("");
 
-  const proceed = () => {
-    if (!answers.district || !answers.tehsil) {
-      setError(t("missingLocation"));
-      return;
-    }
-    navigate({ to: "/eligibility" });
-  };
+  const how = [
+    { icon: ClipboardCheck, text: t("how1") },
+    { icon: MapPin, text: t("how2") },
+    { icon: FileDown, text: t("how3") },
+  ];
 
   return (
     <PageShell step={1}>
@@ -56,63 +49,25 @@ function Welcome() {
         <p className="mt-3 text-base text-foreground/90">{t("welcomeBody")}</p>
       </section>
 
-      <section className="card-enter mt-6 space-y-5 rounded-lg border border-border bg-card p-6 shadow-sm [animation-delay:80ms]">
-        <div>
-          <div className="mb-2 flex items-center justify-between gap-3">
-            <label htmlFor="district" className="text-lg font-semibold text-primary">
-              {t("districtLabel")}
-            </label>
-            <SpeakButton text={t("districtLabel")} />
-          </div>
-          <select
-            id="district"
-            value={answers.district}
-            onChange={(e) => update({ district: e.target.value })}
-            className="interactive-card w-full rounded-lg border-2 border-input bg-background px-4 py-3 text-lg focus:border-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-          >
-            {DISTRICTS.map((d) => (
-              <option key={d.id} value={d.id}>
-                {b(d.label)}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <div className="mb-2 flex items-center justify-between gap-3">
-            <label htmlFor="tehsil" className="text-lg font-semibold text-primary">
-              {t("tehsilLabel")}
-            </label>
-            <SpeakButton text={t("tehsilLabel")} />
-          </div>
-          <select
-            id="tehsil"
-            value={answers.tehsil}
-            onChange={(e) => {
-              update({ tehsil: e.target.value });
-              setError("");
-            }}
-            className="interactive-card w-full rounded-lg border-2 border-input bg-background px-4 py-3 text-lg focus:border-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-          >
-            <option value="">{t("choose")}</option>
-            {TEHSILS.map((tehsil) => (
-              <option key={tehsil.id} value={tehsil.id}>
-                {b(tehsil.label)}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {error && (
-          <p role="alert" className="rounded-lg bg-destructive/10 px-4 py-2 text-sm font-medium text-destructive">
-            {error}
-          </p>
-        )}
+      <section className="card-enter mt-6 rounded-lg border border-border bg-card p-6 shadow-sm [animation-delay:80ms]">
+        <ol className="space-y-4">
+          {how.map((item, i) => (
+            <li key={i} className="flex items-center gap-4">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <item.icon className="h-5 w-5" aria-hidden="true" />
+              </span>
+              <p className="text-lg font-medium text-foreground">
+                <span className="mr-2 font-bold text-primary">{i + 1}.</span>
+                {item.text}
+              </p>
+            </li>
+          ))}
+        </ol>
 
         <button
           type="button"
-          onClick={proceed}
-          className="tactile-button flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-lg font-bold text-primary-foreground hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+          onClick={() => navigate({ to: "/eligibility" })}
+          className="tactile-button mt-7 flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-lg font-bold text-primary-foreground hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
           {t("beginCheck")}
           <ArrowRight className="h-5 w-5" aria-hidden="true" />

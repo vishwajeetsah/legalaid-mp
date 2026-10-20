@@ -7,17 +7,18 @@ import { SpeakButton } from "@/components/SpeakButton";
 import { useLang } from "@/lib/i18n";
 import { useAnswers } from "@/lib/answers-store";
 import { evaluate, requiredDocuments } from "@/lib/eligibility";
-import { DISPUTES, DOCUMENTS, OFFICES, RULES, TEHSILS } from "@/data/legalAid";
+import { DISPUTES, DOCUMENTS, OFFICES, RULES, SAGAR_DISTRICT_CODE, SAGAR_TALUK_OFFICE } from "@/data/legalAid";
+import { findDistrict, findState } from "@/data/india";
 
 export const Route = createFileRoute("/documents")({
   head: () => ({
     meta: [
-      { title: "Documents & Form A (Format 'क') — LegalAid MP" },
+      { title: "Documents & Application — LegalAid India" },
       {
         name: "description",
-        content: "Your personalised legal aid document checklist and a printable, pre-filled MP Legal Aid Form A (Format 'क').",
+        content: "Your personalised legal aid document checklist and a printable, pre-filled legal aid application (PDF) for your district DLSA office.",
       },
-      { property: "og:title", content: "Documents & Form A (Format 'क') — LegalAid MP" },
+      { property: "og:title", content: "Documents & Application — LegalAid India" },
       { property: "og:description", content: "Personalised document checklist and printable pre-filled legal aid application form." },
     ],
   }),
@@ -33,13 +34,22 @@ function Documents() {
   const [tried, setTried] = useState(false);
 
   useEffect(() => {
-    if (hydrated && !answers.tehsil) navigate({ to: "/" });
-  }, [hydrated, answers.tehsil, navigate]);
+    if (hydrated && answers.categories.length === 0 && answers.incomeUnderCap === null && !answers.dispute) {
+      navigate({ to: "/" });
+    }
+  }, [hydrated, answers.categories.length, answers.incomeUnderCap, answers.dispute, navigate]);
 
   const docs = useMemo(() => requiredDocuments(answers), [answers]);
   const verdict = useMemo(() => evaluate(answers), [answers]);
-  const office = OFFICES[answers.tehsil];
-  const tehsil = TEHSILS.find((x) => x.id === answers.tehsil);
+  const state = findState(answers.stateCode);
+  const district = findDistrict(state, answers.district);
+  const sagarOfficeId = answers.district === SAGAR_DISTRICT_CODE ? SAGAR_TALUK_OFFICE[answers.taluk.toLowerCase()] : undefined;
+  const office = sagarOfficeId ? OFFICES[sagarOfficeId] : undefined;
+  const officeLine = office
+    ? `${b(office.name)}, ${b(office.address)}`
+    : district
+      ? `District Legal Services Authority (DLSA), ${district.name}, ${state?.name ?? ""}`
+      : "";
   const dispute = DISPUTES.find((d) => d.id === answers.dispute);
   const blank = t("notFilled");
 
@@ -163,7 +173,9 @@ function Documents() {
 
             <div className="print-area px-6 py-6 text-[15px] text-black">
               <p className="text-center text-sm font-semibold">
-                {lang === "hi" ? "मध्य प्रदेश राज्य विधिक सेवा प्राधिकरण" : "Madhya Pradesh State Legal Services Authority"}
+                {lang === "hi"
+                  ? `जिला विधिक सेवा प्राधिकरण, ${district?.name ?? ""} (${state?.name ?? ""})`
+                  : `District Legal Services Authority, ${district?.name ?? ""} (${state?.name ?? ""})`}
               </p>
               <h3 className="mt-1 text-center font-serif text-lg font-bold">{t("formTitle")}</h3>
               <p className="mt-1 text-center text-xs">
@@ -175,7 +187,11 @@ function Documents() {
                 <Row n="2" label={lang === "hi" ? "पिता / पति का नाम" : "Father's / Husband's name"} value={answers.fatherName || blank} />
                 <Row n="3" label={lang === "hi" ? "पता" : "Address"} value={answers.address || blank} />
                 <Row n="4" label={lang === "hi" ? "मोबाइल नंबर" : "Mobile number"} value={answers.phone || blank} />
-                <Row n="5" label={lang === "hi" ? "जिला / तहसील" : "District / Tehsil"} value={`${lang === "hi" ? "सागर" : "Sagar"} / ${tehsil ? b(tehsil.label) : blank}`} />
+                <Row
+                  n="5"
+                  label={lang === "hi" ? "राज्य / जिला / तालुका" : "State / District / Taluk"}
+                  value={`${state?.name ?? blank} / ${district?.name ?? blank} / ${answers.taluk || blank}`}
+                />
                 <Row
                   n="6"
                   label={lang === "hi" ? "श्रेणी" : "Category claimed"}
@@ -200,15 +216,15 @@ function Documents() {
                         : "Not applicable (Section 12 category)"
                       : answers.incomeUnderCap
                         ? lang === "hi"
-                          ? "₹2,00,000 से कम"
-                          : "Below ₹2,00,000"
+                          ? "राज्य सरकार द्वारा निर्धारित सीमा से कम"
+                          : "Below the limit prescribed by the State Government"
                         : lang === "hi"
-                          ? "₹2,00,000 या अधिक"
-                          : "₹2,00,000 or above"
+                          ? "राज्य सरकार द्वारा निर्धारित सीमा से अधिक"
+                          : "Above the limit prescribed by the State Government"
                   }
                 />
                 <Row n="8" label={lang === "hi" ? "विवाद का प्रकार" : "Nature of dispute"} value={dispute ? b(dispute.label) : blank} />
-                <Row n="9" label={lang === "hi" ? "प्रस्तुत करने का कार्यालय" : "Office of submission"} value={office ? `${b(office.name)}, ${b(office.address)}` : blank} />
+                <Row n="9" label={lang === "hi" ? "प्रस्तुत करने का कार्यालय" : "Office of submission"} value={officeLine || blank} />
                 <Row
                   n="10"
                   label={lang === "hi" ? "पात्रता का आधार" : "Basis of eligibility"}

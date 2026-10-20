@@ -5,18 +5,19 @@ import { PageShell } from "@/components/PageShell";
 import { SpeakButton } from "@/components/SpeakButton";
 import { useLang } from "@/lib/i18n";
 import { useAnswers } from "@/lib/answers-store";
-import { OFFICES } from "@/data/legalAid";
+import { OFFICES, SAGAR_DISTRICT_CODE, SAGAR_TALUK_OFFICE, type Office } from "@/data/legalAid";
+import { findDistrict, findState } from "@/data/india";
 
 export const Route = createFileRoute("/office")({
   head: () => ({
     meta: [
-      { title: "Legal Aid Office Finder — Sagar District | LegalAid MP" },
+      { title: "Legal Aid Office Finder — LegalAid India" },
       {
         name: "description",
-        content: "Address, working hours and directions for the DLSA Sagar and Taluk Legal Services Committee offices in Khurai, Bina, Banda, Deori and Rahatgarh.",
+        content: "Find your District Legal Services Authority (DLSA) office — located in your district court premises — with directions to submit your legal aid application.",
       },
-      { property: "og:title", content: "Legal Aid Office Finder — Sagar District | LegalAid MP" },
-      { property: "og:description", content: "Find your DLSA or TLSC legal aid office in Sagar district with address, hours and map directions." },
+      { property: "og:title", content: "Legal Aid Office Finder — LegalAid India" },
+      { property: "og:description", content: "Find your DLSA legal aid office anywhere in India and submit your application." },
     ],
   }),
   component: OfficeFinder,
@@ -26,13 +27,32 @@ function OfficeFinder() {
   const { t, b } = useLang();
   const { answers, hydrated, reset } = useAnswers();
   const navigate = useNavigate();
-  const office = OFFICES[answers.tehsil];
+
+  const state = findState(answers.stateCode);
+  const district = findDistrict(state, answers.district);
+  const sagarOfficeId = answers.district === SAGAR_DISTRICT_CODE ? SAGAR_TALUK_OFFICE[answers.taluk.toLowerCase()] : undefined;
 
   useEffect(() => {
-    if (hydrated && !answers.tehsil) navigate({ to: "/" });
-  }, [hydrated, answers.tehsil, navigate]);
+    if (hydrated && !district) navigate({ to: "/" });
+  }, [hydrated, district, navigate]);
 
-  if (!office) return <PageShell step={5}>{null}</PageShell>;
+  if (!district) return <PageShell step={5}>{null}</PageShell>;
+
+  const office: Office = sagarOfficeId
+    ? OFFICES[sagarOfficeId]!
+    : {
+        name: {
+          en: `District Legal Services Authority (DLSA), ${district.name}`,
+          hi: `जिला विधिक सेवा प्राधिकरण (डीएलएसए), ${district.name}`,
+        },
+        address: {
+          en: `District & Sessions Court Premises, ${district.name} (${state?.name ?? ""})`,
+          hi: `जिला एवं सत्र न्यायालय परिसर, ${district.name} (${state?.name ?? ""})`,
+        },
+        phone: "",
+        hours: { en: "10:00 AM – 5:00 PM (Mon–Sat, except holidays)", hi: "प्रातः 10:00 – सायं 5:00 (सोम–शनि, अवकाश छोड़कर)" },
+        mapsQuery: `District Court ${district.name} ${state?.name ?? ""}`,
+      };
 
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office.mapsQuery)}`;
 
@@ -60,13 +80,15 @@ function OfficeFinder() {
               {b(office.hours)}
             </span>
           </p>
-          <p className="mt-3 flex items-start gap-3 text-base">
-            <Phone className="mt-1 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
-            <span>
-              <span className="font-semibold">{t("phoneOffice")}: </span>
-              {office.phone}
-            </span>
-          </p>
+          {office.phone && (
+            <p className="mt-3 flex items-start gap-3 text-base">
+              <Phone className="mt-1 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
+              <span>
+                <span className="font-semibold">{t("phoneOffice")}: </span>
+                {office.phone}
+              </span>
+            </p>
+          )}
         </div>
 
         <a
@@ -78,7 +100,7 @@ function OfficeFinder() {
           <MapPin className="h-5 w-5" aria-hidden="true" /> {t("openMaps")}
         </a>
 
-        <p className="mt-4 text-sm text-muted-foreground">{t("phoneNote")}</p>
+        {office.phone && <p className="mt-4 text-sm text-muted-foreground">{t("phoneNote")}</p>}
       </section>
 
       <div className="mt-6 flex flex-wrap items-center gap-4">
