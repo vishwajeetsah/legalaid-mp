@@ -17,7 +17,8 @@ order:
 
 > **Disclaimer:** This tool gives an indicative self-assessment only. Final
 > determination of eligibility always rests with the competent Legal Services
-> Authority.
+> Authority. It provides legal information and awareness only — it is not legal
+> advice, and it does not create any lawyer–client relationship.
 
 ## Features
 
@@ -29,7 +30,10 @@ order:
   instead of applying one national figure)
 - **Pan-India geography** — all 36 states/UTs, 735 districts and 6,857 taluks
   (sub-districts) from the Local Government Directory (LGD), Ministry of
-  Panchayati Raj (see `src/data/india.ts`)
+  Panchayati Raj (see `src/data/india.ts`). Known gap: the dataset predates
+  some recent district creations — for example, Madhya Pradesh lists 52 of
+  its current 55 districts (Maihar, Mauganj and Pandhurna are not yet
+  included)
 - **Document checklist + printable application** (`/documents`) — what to carry,
   and a one-page pre-filled application to print or save as PDF and submit at
   the DLSA
@@ -53,7 +57,15 @@ order:
 - Nitro with the `cloudflare-module` preset for production deploys (Cloudflare Workers)
 - GitHub Pages static deployment (prerendered) for the live site
 
+## License
+
+MIT — see [LICENSE](LICENSE).
+
 ## Author
 
 **Vishwajeet Sah** — Para Legal Volunteer, DLSA Sagar; B.A. LL.B. (Hons) student,
 Dr. Harisingh Gour Vishwavidyalaya, Sagar.
+
+---
+
+*README last verified against the live application on 25 October 2026.*
