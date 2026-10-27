@@ -57,6 +57,65 @@ order:
 - Nitro with the `cloudflare-module` preset for production deploys (Cloudflare Workers)
 - GitHub Pages static deployment (prerendered) for the live site
 
+## Getting started (setup)
+
+**Prerequisites:** [Bun](https://bun.sh) 1.x (used for install, dev and tests) or
+Node.js 20+ with npm, and Git.
+
+```bash
+git clone https://github.com/vishwajeetsah/legalaid-mp.git
+cd legalaid-mp
+bun install          # or: npm install
+bun run dev          # local dev server at http://localhost:8080
+```
+
+**Production builds:**
+
+```bash
+bun run build              # SSR build (Nitro, Cloudflare Workers preset)
+GH_PAGES=true bun run build   # static prerendered build for GitHub Pages
+bun run preview            # preview a production build locally
+```
+
+The GitHub Pages build is what powers the live site at
+https://vishwajeetsah.github.io/legalaid-mp/ — it prerenders every route to
+static HTML under the `/legalaid-mp/` base path.
+
+## Environment variables
+
+LegalAid India has **no backend, no database and no API keys** — nothing secret
+is required to run it. The only environment variables are build-time flags:
+
+| Variable | Required | Default | Purpose |
+|---|---|---|---|
+| `GH_PAGES` | No | unset | Set to `true` to build the static GitHub Pages variant (base path `/legalaid-mp/`, Nitro skipped). Leave unset for the Cloudflare Workers SSR build. |
+| `VITE_ROUTER_BASEPATH` | No | `/` | Router base path. Set automatically by `vite.config.ts` from `GH_PAGES`; override only for other subpath hosting. |
+| `VITE_*` | No | — | Any `VITE_`-prefixed variables are exposed to the client via `import.meta.env` (see `vite.config.ts`). None are required by the app today. |
+
+Applicant answers are never sent to a server: they are held only in the
+browser's `sessionStorage` (key `legalaid-answers-v2`) and are cleared when the
+tab session ends.
+
+## Testing
+
+Eligibility rules are covered by data-driven tests. Every case in
+[`tests/sample-data/eligibility-cases.json`](tests/sample-data/eligibility-cases.json)
+(sample inputs with the expected verdict and document list) is executed against
+the real rules engine (`src/lib/eligibility.ts`) by
+[`tests/eligibility.test.ts`](tests/eligibility.test.ts):
+
+```bash
+bun test    # or: bun run test
+```
+
+## Documentation
+
+- **Technical design document (architecture, diagrams, data model):**
+  [`docs/TECHNICAL_DESIGN.md`](docs/TECHNICAL_DESIGN.md)
+- **Sample data & test cases:**
+  [`tests/sample-data/eligibility-cases.json`](tests/sample-data/eligibility-cases.json)
+- **Live application:** https://vishwajeetsah.github.io/legalaid-mp/
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
@@ -68,4 +127,4 @@ Dr. Harisingh Gour Vishwavidyalaya, Sagar.
 
 ---
 
-*README last verified against the live application on 25 October 2026.*
+*README last verified against the live application on 27 October 2026.*
