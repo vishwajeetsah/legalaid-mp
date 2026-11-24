@@ -23,6 +23,7 @@ const initial: Answers = {
   casePending: false,
   incomeUncertain: false,
   scanUsed: false,
+  pin: "",
 };
 
 type Ctx = {

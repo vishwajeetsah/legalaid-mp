@@ -39,6 +39,24 @@ const dict = {
     en: "Your application goes to the District Legal Services Authority (DLSA) of your district.",
     hi: "आपका आवेदन आपके जिले के जिला विधिक सेवा प्राधिकरण (डीएलएसए) के पास जाएगा।",
   },
+  confirmTitle: { en: "Confirm your details", hi: "अपने विवरण की पुष्टि करें" },
+  confirmHelpScan: {
+    en: "We filled this from your Aadhaar card. Please read it once — if everything is correct, just continue.",
+    hi: "यह विवरण आपके आधार कार्ड से भरा गया है। कृपया इसे एक बार पढ़ लें — यदि सब कुछ सही है, तो बस आगे बढ़ें।",
+  },
+  confirmHelp: {
+    en: "Fill in your details below. If your address includes your PIN code, we will find your legal aid office automatically.",
+    hi: "नीचे अपना विवरण भरें। यदि आपके पते में आपका पिन कोड शामिल है, तो हम आपका विधिक सेवा कार्यालय स्वतः खोज देंगे।",
+  },
+  yourOfficeLabel: { en: "Your legal aid office", hi: "आपका विधिक सेवा कार्यालय" },
+  dlsaName: { en: "District Legal Services Authority", hi: "जिला विधिक सेवा प्राधिकरण" },
+  changeLabel: { en: "Change", hi: "बदलें" },
+  editDetailsLabel: { en: "Something is wrong? Edit", hi: "कुछ गलत है? संपादित करें" },
+  matterTitle: { en: "Your matter", hi: "आपका मामला" },
+  matterHelp: {
+    en: "Tell us what the matter is about, and what help you want.",
+    hi: "बताएं कि मामला किस विषय में है, और आप क्या सहायता चाहते हैं।",
+  },
   detailsTitle: { en: "Your basic details", hi: "आपका मूल विवरण" },
   detailsHelp: {
     en: "The legal aid office needs only these details to register your application.",

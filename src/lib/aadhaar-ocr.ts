@@ -6,7 +6,7 @@ import type { Answers } from "@/lib/eligibility";
  * is simply absent so the user can type it in the normal steps.
  */
 export type AadhaarScan = Partial<
-  Pick<Answers, "applicantName" | "fatherName" | "address" | "gender" | "dob">
+  Pick<Answers, "applicantName" | "fatherName" | "address" | "gender" | "dob" | "pin">
 >;
 
 const HEADER_WORDS = [
@@ -67,6 +67,7 @@ export function parseAadhaarText(text: string): AadhaarScan {
   // PIN code — the last 6-digit code on the card is the address PIN.
   const pins = text.match(/\b[1-9]\d{5}\b/g);
   const pin = pins && pins.length > 0 ? pins[pins.length - 1] : undefined;
+  if (pin) found.pin = pin;
 
   // Father's / husband's name from the "S/O", "D/O", "W/O", "C/O" line.
   const careMatch = text.match(/(?:S\/O|D\/O|W\/O|C\/O)[:\s]+([A-Za-z ]+)/i);

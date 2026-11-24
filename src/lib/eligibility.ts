@@ -20,6 +20,7 @@ export type Answers = {
   casePending: boolean;
   incomeUncertain: boolean;
   scanUsed: boolean;
+  pin: string;
 };
 
 export type Verdict = {
