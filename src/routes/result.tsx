@@ -93,7 +93,7 @@ function Result() {
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
           <Link
             to="/documents"
-            className="tactile-button inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-center font-bold text-primary-foreground hover:bg-primary/90"
+            className="tactile-button inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-center font-bold text-primary-foreground hover:bg-accent hover:text-accent-foreground"
           >
             {t("toDocs")} <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
@@ -132,7 +132,7 @@ function Result() {
                 <p className="text-sm text-muted-foreground">{t("altHelplineBody")}</p>
                 <a
                   href="tel:15100"
-                  className="mt-2 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:bg-primary/90"
+                  className="mt-2 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:bg-accent hover:text-accent-foreground"
                 >
                   <Phone className="h-4 w-4" aria-hidden="true" /> {t("callNow")}
                 </a>

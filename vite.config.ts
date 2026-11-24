@@ -14,8 +14,8 @@ export default defineConfig(({ command, mode }) => {
 
   // Static hosting (e.g. GitHub Pages project site) serves the app from a
   // subpath. Build with GH_PAGES=true to prefix asset URLs and the router.
-  const pagesBase = process.env.GH_PAGES ? "/legalaid-mp/" : "/";
-  const routerBasepath = process.env.GH_PAGES ? "/legalaid-mp" : "/";
+  const pagesBase = process.env.GH_PAGES ? (process.env.GH_PAGES_BASE ?? "/legalaid-mp/") : "/";
+  const routerBasepath = process.env.GH_PAGES ? pagesBase.replace(/\/$/, "") : "/";
   envDefine["import.meta.env.VITE_ROUTER_BASEPATH"] = JSON.stringify(routerBasepath);
 
   return {

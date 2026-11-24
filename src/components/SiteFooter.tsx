@@ -6,7 +6,7 @@ export function SiteFooter() {
   const { t } = useLang();
 
   return (
-    <footer className="mt-auto border-t border-footer-border bg-footer text-footer-foreground print:hidden">
+    <footer className="mt-auto border-t-[3px] border-accent bg-footer text-footer-foreground print:hidden">
       <div className="mx-auto max-w-4xl px-4 py-8">
         <p className="max-w-2xl text-base font-semibold leading-relaxed">{t("footerMain")}</p>
         <div className="mt-5 flex flex-wrap gap-2">

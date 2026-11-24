@@ -157,7 +157,7 @@ function Guide() {
             </ul>
             <a
               href="tel:15100"
-              className="tactile-button mt-5 inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 font-bold text-primary-foreground hover:bg-primary/90"
+              className="tactile-button mt-5 inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 font-bold text-primary-foreground hover:bg-accent hover:text-accent-foreground"
             >
               <Phone className="h-4 w-4" aria-hidden="true" /> {t("callNow")}
             </a>
@@ -168,7 +168,7 @@ function Guide() {
       <div className="mt-6">
         <Link
           to="/eligibility"
-          className="tactile-button flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-lg font-bold text-primary-foreground hover:bg-primary/90"
+          className="tactile-button flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-lg font-bold text-primary-foreground hover:bg-accent hover:text-accent-foreground"
         >
           {t("beginCheck")}
           <ArrowRight className="h-5 w-5" aria-hidden="true" />

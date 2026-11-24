@@ -3,6 +3,7 @@ import type { Bilingual, Lang } from "@/data/legalAid";
 
 const dict = {
   appName: { en: "LegalAid India", hi: "लीगलएड इंडिया" },
+  govIndia: { en: "Government of India | भारत सरकार", hi: "भारत सरकार | Government of India" },
   tagline: { en: "Free Legal Aid Helper — All India", hi: "नि:शुल्क विधिक सहायता सहायक — संपूर्ण भारत" },
   langLabel: { en: "Language", hi: "भाषा" },
   themeLabel: { en: "Appearance", hi: "दिखावट" },
@@ -20,14 +21,14 @@ const dict = {
   step4: { en: "Documents", hi: "दस्तावेज" },
   step5: { en: "Office", hi: "कार्यालय" },
 
-  welcomeTitle: { en: "Free legal aid is your right", hi: "नि:शुल्क विधिक सहायता आपका अधिकार है" },
+  welcomeTitle: { en: "Claim your free legal aid", hi: "अपनी नि:शुल्क विधिक सहायता का दावा करें" },
   welcomeBody: {
-    en: "Under the Legal Services Authorities Act, 1987, eligible citizens anywhere in India get a lawyer, court fees and legal advice free of cost. Answer a few simple questions to check if you qualify.",
-    hi: "विधिक सेवा प्राधिकरण अधिनियम, 1987 के अंतर्गत भारत में कहीं भी पात्र नागरिकों को वकील, न्यायालय शुल्क और विधिक सलाह नि:शुल्क मिलती है। अपनी पात्रता जांचने के लिए कुछ सरल प्रश्नों के उत्तर दें।",
+    en: "The law gives free legal aid — a lawyer, court fees and legal advice at no cost — to citizens who qualify under the Legal Services Authorities Act, 1987. This tool checks whether you qualify and fills the official application form with you, ready to take to your district legal aid office.",
+    hi: "विधिक सेवा प्राधिकरण अधिनियम, 1987 के अंतर्गत पात्र नागरिकों को नि:शुल्क विधिक सहायता — वकील, न्यायालय शुल्क और विधिक सलाह बिना किसी खर्च के — प्राप्त होती है। यह साधन जांचता है कि आप पात्र हैं या नहीं, और आपके साथ आधिकारिक आवेदन प्रपत्र भरता है, जिसे आप अपने जिला विधिक सहायता कार्यालय में ले जा सकते हैं।",
   },
-  how1: { en: "Answer 3 simple questions", hi: "3 सरल प्रश्नों के उत्तर दें" },
-  how2: { en: "Add your state, district & basic details", hi: "अपना राज्य, जिला एवं मूल विवरण जोड़ें" },
-  how3: { en: "Download your application and submit it at your DLSA office", hi: "अपना आवेदन डाउनलोड करें और डीएलएसए कार्यालय में जमा करें" },
+  how1: { en: "Scan your Aadhaar card, or answer a few simple questions", hi: "अपना आधार कार्ड स्कैन करें, या कुछ सरल प्रश्नों के उत्तर दें" },
+  how2: { en: "We check your eligibility and fill the official application form for you", hi: "हम आपकी पात्रता जांचते हैं और आपके लिए आधिकारिक आवेदन प्रपत्र भरते हैं" },
+  how3: { en: "Download the filled form and take it to your DLSA office", hi: "भरा हुआ प्रपत्र डाउनलोड करें और अपने डीएलएसए कार्यालय ले जाएं" },
   stateLabel: { en: "Select your state", hi: "अपना राज्य चुनें" },
   districtLabel: { en: "Select your district", hi: "अपना जिला चुनें" },
   tehsilLabel: { en: "Select your tehsil / taluk", hi: "अपनी तहसील / तालुका चुनें" },
@@ -44,12 +45,26 @@ const dict = {
     hi: "विधिक सहायता कार्यालय को आपका आवेदन दर्ज करने के लिए केवल इन्हीं विवरणों की आवश्यकता है।",
   },
   choose: { en: "Choose an option", hi: "एक विकल्प चुनें" },
-  beginCheck: { en: "Check my eligibility", hi: "मेरी पात्रता जांचें" },
+  beginCheck: { en: "Claim Free Legal Aid", hi: "नि:शुल्क विधिक सहायता का दावा करें" },
 
-  q1Title: { en: "Do any of these describe you?", hi: "क्या इनमें से कोई आप पर लागू होता है?" },
+  scanTitle: { en: "Start with your Aadhaar card", hi: "अपने आधार कार्ड से शुरू करें" },
+  scanBody: {
+    en: "Take a photo of your Aadhaar card, or upload one. Your details are read on this device and filled in for you — nothing is uploaded or stored. You can correct anything in the next steps.",
+    hi: "अपने आधार कार्ड का फोटो लें, या कोई फोटो अपलोड करें। आपका विवरण इसी उपकरण पर पढ़ा जाता है और आपके लिए भर दिया जाता है — कुछ भी अपलोड या संग्रहित नहीं किया जाता। अगले चरणों में आप कुछ भी सुधार सकते हैं।",
+  },
+  scanButton: { en: "Scan my Aadhaar card", hi: "मेरा आधार कार्ड स्कैन करें" },
+  scanReading: { en: "Reading your card…", hi: "आपका कार्ड पढ़ा जा रहा है…" },
+  scanTypeInstead: { en: "Type my details instead", hi: "इसके बजाय मैं अपना विवरण स्वयं लिखूँगा/लिखूँगी" },
+  scanReadTitle: { en: "We read this from your card", hi: "आपके कार्ड से यह पढ़ा गया" },
+  scanNoneFound: {
+    en: "We could not read the card clearly. You can try another photo, or type your details instead.",
+    hi: "कार्ड स्पष्ट रूप से पढ़ा नहीं जा सका। आप दूसरा फोटो लेकर पुनः प्रयास कर सकते हैं, या अपना विवरण स्वयं लिख सकते हैं।",
+  },
+
+  q1Title: { en: "Which of these are true for you?", hi: "इनमें से कौन-सी बातें आप पर लागू होती हैं?" },
   q1Help: {
-    en: "Select every option that applies. If any applies, you get free legal aid whatever your income.",
-    hi: "जो भी लागू हो सभी चुनें। यदि कोई लागू होता है, तो आय चाहे कुछ भी हो, आपको नि:शुल्क विधिक सहायता मिलेगी।",
+    en: "Tap all that apply. Each one is a ground for free legal aid under the Legal Services Authorities Act, 1987.",
+    hi: "जो भी लागू हों, सभी चुनें। इनमें से प्रत्येक विधिक सेवा प्राधिकरण अधिनियम, 1987 के अंतर्गत नि:शुल्क विधिक सहायता का आधार है।",
   },
   noneApply: { en: "None of these apply to me", hi: "इनमें से कोई भी लागू नहीं है" },
   q2Title: { en: "Is your total annual family income below your state's limit?", hi: "क्या आपकी कुल वार्षिक पारिवारिक आय आपके राज्य की सीमा से कम है?" },
@@ -59,11 +74,25 @@ const dict = {
   },
   yes: { en: "Yes, below the limit", hi: "हाँ, सीमा से कम" },
   no: { en: "No, above the limit", hi: "नहीं, सीमा से अधिक" },
+  yesGeneric: { en: "Yes", hi: "हाँ" },
+  noGeneric: { en: "No", hi: "नहीं" },
+  notSure: { en: "Not sure", hi: "निश्चित नहीं हूँ" },
+  monthlyIncomeLabel: {
+    en: "Roughly, how much does your family earn in one month? (₹)",
+    hi: "लगभग, आपका परिवार एक महीने में कितना कमाता है? (₹)",
+  },
+  annualEstimateBefore: { en: "That is about", hi: "यह एक वर्ष में लगभग" },
+  annualEstimateAfter: { en: "in a year.", hi: "है।" },
+  belowLimitQuestion: {
+    en: "Is this below the limit prescribed by your State Government?",
+    hi: "क्या यह आपकी राज्य सरकार द्वारा निर्धारित सीमा से कम है?",
+  },
+  stillDontKnow: { en: "I still don't know — the DLSA can confirm", hi: "मुझे फिर भी ज्ञात नहीं है — डीएलएसए पुष्टि कर सकता है" },
   q3Title: { en: "What kind of dispute is it?", hi: "यह किस प्रकार का विवाद है?" },
   q3Help: { en: "Pick the closest match.", hi: "सबसे मिलता-जुलता विकल्प चुनें।" },
   seeResult: { en: "See my result", hi: "मेरा परिणाम देखें" },
 
-  eligibleTitle: { en: "You are eligible for free legal aid", hi: "आप नि:शुल्क विधिक सहायता के पात्र हैं" },
+  eligibleTitle: { en: "You can claim free legal aid", hi: "आप निःशुल्क विधिक सहायता का दावा कर सकते हैं" },
   notEligibleTitle: { en: "You do not qualify for free legal aid", hi: "आप नि:शुल्क विधिक सहायता के पात्र नहीं हैं" },
   whyTitle: { en: "Why", hi: "कारण" },
   altTitle: { en: "You can still get help", hi: "आपको फिर भी सहायता मिल सकती है" },
@@ -95,6 +124,45 @@ const dict = {
   fatherLabel: { en: "Father's / Husband's name", hi: "पिता / पति का नाम" },
   addressLabel: { en: "Address", hi: "पता" },
   phoneLabel: { en: "Mobile number", hi: "मोबाइल नंबर" },
+  genderLabel: { en: "Gender", hi: "लिंग" },
+  genderFemale: { en: "Female", hi: "महिला" },
+  genderMale: { en: "Male", hi: "पुरुष" },
+  genderOther: { en: "Other", hi: "अन्य" },
+  dobLabel: { en: "Date of birth", hi: "जन्म तिथि" },
+
+  caseTitle: { en: "Your case", hi: "आपका प्रकरण" },
+  caseHelp: {
+    en: "The last few details, needed to complete the official application form.",
+    hi: "आधिकारिक आवेदन प्रपत्र पूर्ण करने के लिए आवश्यक अंतिम कुछ विवरण।",
+  },
+  oppositeLabel: { en: "Name of the opposite party", hi: "विपक्षी पक्ष का नाम" },
+  oppositeUnknownLabel: { en: "I don't know / not applicable", hi: "मुझे ज्ञात नहीं है / लागू नहीं है" },
+  reliefLabel: { en: "What do you want?", hi: "आप क्या चाहते हैं?" },
+  reliefFileCase: { en: "I want to file a case", hi: "मैं प्रकरण दायर करना चाहता/चाहती हूँ" },
+  reliefAdvice: { en: "I only want legal advice", hi: "मैं केवल विधिक सलाह चाहता/चाहती हूँ" },
+  previousApplicationLabel: { en: "Have you applied for legal aid before?", hi: "क्या आपने पहले विधिक सहायता हेतु आवेदन किया है?" },
+  casePendingLabel: {
+    en: "Is any case in this matter already pending in a court?",
+    hi: "क्या इस मामले में कोई प्रकरण पहले से किसी न्यायालय में लंबित है?",
+  },
+
+  nextStepsTitle: { en: "What happens next", hi: "आगे क्या होगा" },
+  nextStep1: {
+    en: "Take this application and your documents to the DLSA office shown on it.",
+    hi: "यह आवेदन और अपने दस्तावेज आवेदन पर दर्शाए गए डीएलएसए कार्यालय में ले जाएं।",
+  },
+  nextStep2: {
+    en: "The office checks your eligibility. The final decision rests with the Legal Services Authority.",
+    hi: "कार्यालय आपकी पात्रता की जांच करेगा। अंतिम निर्णय विधिक सेवा प्राधिकरण का होगा।",
+  },
+  nextStep3: {
+    en: "If approved, a legal aid advocate is assigned to you, free of cost.",
+    hi: "स्वीकृति मिलने पर आपको नि:शुल्क विधिक सहायता अधिवक्ता नियुक्त किया जाएगा।",
+  },
+  nextStep4: {
+    en: "Your matter proceeds in court — or, if both sides agree, is settled in a Lok Adalat.",
+    hi: "आपका मामला न्यायालय में आगे बढ़ेगा — या, यदि दोनों पक्ष सहमत हों, तो लोक अदालत में निपटाया जाएगा।",
+  },
   requiredMark: { en: "(required)", hi: "(अनिवार्य)" },
   fieldRequired: { en: "This field is required", hi: "यह विवरण आवश्यक है" },
   phoneInvalid: { en: "Enter a valid mobile number", hi: "एक मान्य मोबाइल नंबर दर्ज करें" },
@@ -113,6 +181,77 @@ const dict = {
   docsVerificationNote: {
     en: "The applicant will carry the originals of the above documents to the Legal Services Authority office for verification of eligibility for free legal aid.",
     hi: "आवेदक निःशुल्क विधिक सहायता हेतु पात्रता सत्यापन के लिए उपरोक्त दस्तावेज़ों की मूल प्रतियाँ विधिक सेवा प्राधिकरण कार्यालय में साथ लेकर जाएगा/जाएगी।",
+  },
+
+  formAppTitle: { en: "APPLICATION FORM FOR LEGAL AID", hi: "विधिक सहायता हेतु आवेदन प्रपत्र" },
+  formUnderAct: {
+    en: "Under the Legal Services Authorities Act, 1987",
+    hi: "विधिक सेवा प्राधिकरण अधिनियम, 1987 के अंतर्गत",
+  },
+  formTo: { en: "To,", hi: "सेवा में," },
+  formSecretary: {
+    en: "The Secretary, District Legal Services Authority",
+    hi: "सचिव, जिला विधिक सेवा प्राधिकरण",
+  },
+  f3Label: { en: "Residential Address (Contact No.)", hi: "आवासीय पता (संपर्क क्रमांक)" },
+  f4Label: { en: "Category under Section 12", hi: "धारा 12 के अंतर्गत श्रेणी" },
+  f4Income: {
+    en: "Income below the limit prescribed by the State Government — Section 12(h)",
+    hi: "राज्य सरकार द्वारा निर्धारित सीमा से कम आय — धारा 12(ज)",
+  },
+  f5Label: { en: "Name of Office and Address", hi: "कार्यालय का नाम एवं पता" },
+  f6Label: { en: "Nationality", hi: "राष्ट्रीयता" },
+  f6Value: { en: "Indian", hi: "भारतीय" },
+  f7Label: { en: "Annual Income", hi: "वार्षिक आय" },
+  f7NA: {
+    en: "Not applicable — eligible irrespective of income under",
+    hi: "लागू नहीं — निम्न के अंतर्गत आय की परवाह किए बिना पात्र",
+  },
+  f7Below: {
+    en: "Below the limit prescribed by the State Government under Section 12(h), as declared by the applicant (affidavit on ₹10 non-judicial stamp paper to be attached)",
+    hi: "धारा 12(ज) के अंतर्गत राज्य सरकार द्वारा निर्धारित सीमा से कम, आवेदक द्वारा घोषित (₹10 के गैर-न्यायिक स्टाम्प पेपर पर शपथ पत्र संलग्न किया जाए)",
+  },
+  f7Confirm: { en: "To be confirmed by the Authority", hi: "प्राधिकरण द्वारा पुष्टि की जाएगी" },
+  f7Above: {
+    en: "Above the limit prescribed by the State Government",
+    hi: "राज्य सरकार द्वारा निर्धारित सीमा से अधिक",
+  },
+  f8Label: { en: "Name and Address of Opposite Party", hi: "विपक्षी पक्ष का नाम एवं पता" },
+  f8Unknown: { en: "Not known", hi: "ज्ञात नहीं" },
+  f9Label: { en: "Nature of Relief Sought", hi: "मांगी गई राहत का स्वरूप" },
+  f9Advice: {
+    en: "Legal advice / counselling by Legal Aid Advocate",
+    hi: "विधिक सहायता अधिवक्ता द्वारा विधिक सलाह / परामर्श",
+  },
+  f9File: {
+    en: "Legal aid to file and pursue a case",
+    hi: "प्रकरण दायर करने एवं चलाने हेतु विधिक सहायता",
+  },
+  f10Label: { en: "Type of Case", hi: "प्रकरण का प्रकार" },
+  f11Label: {
+    en: "Whether any application for legal aid has been filed previously",
+    hi: "क्या पहले विधिक सहायता हेतु कोई आवेदन दिया गया है",
+  },
+  f12Label: {
+    en: "Whether any case is pending before any court",
+    hi: "क्या कोई प्रकरण किसी न्यायालय में लंबित है",
+  },
+  formUndertaking: {
+    en: "I undertake that if the legal services obtained by me are found to have been obtained by furnishing incorrect or false information or in a fraudulent manner, the legal services shall be stopped forthwith and the expenses incurred by the Legal Services Institutions shall be recovered from me.",
+    hi: "मैं वचन देता/देती हूँ कि यदि मेरे द्वारा प्राप्त विधिक सेवाएँ गलत या झूठी जानकारी देकर अथवा धोखाधड़ी से प्राप्त की गई पाई जाती हैं, तो विधिक सेवाएँ तत्काल बंद कर दी जाएंगी और विधिक सेवा संस्थानों द्वारा किया गया व्यय मुझसे वसूल किया जाएगा।",
+  },
+  formPlace: { en: "Place", hi: "स्थान" },
+  formDate: { en: "Date", hi: "दिनांक" },
+  formSignatureApplicant: { en: "Signature of the Applicant", hi: "आवेदक के हस्ताक्षर" },
+  counselTitle: { en: "To be filled by Legal Aid Counsel", hi: "विधिक सहायता अधिवक्ता द्वारा भरा जाए" },
+  counselSummary: { en: "Summary of dispute", hi: "विवाद का सारांश" },
+  counselRecommendation: {
+    en: "Recommendation of Legal Aid Counsel",
+    hi: "विधिक सहायता अधिवक्ता की अनुशंसा",
+  },
+  counselSignature: {
+    en: "Signature (Name in capital letters)",
+    hi: "हस्ताक्षर (नाम बड़े अक्षरों में)",
   },
 
   guideTitle: { en: "Know your rights", hi: "अपने अधिकार जानें" },

@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowRight, BookOpenText, ClipboardCheck, MapPin, FileDown, ScrollText, Siren } from "lucide-react";
+import { ArrowRight, BookOpenText, ClipboardCheck, FileDown, ScanLine, ScrollText, Siren } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { SpeakButton } from "@/components/SpeakButton";
 import { useLang } from "@/lib/i18n";
@@ -7,16 +7,16 @@ import { useLang } from "@/lib/i18n";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "LegalAid India — Free Legal Aid Eligibility Check" },
+      { title: "LegalAid India — Claim Free Legal Aid" },
       {
         name: "description",
         content:
-          "Check if you qualify for free legal aid anywhere in India under the Legal Services Authorities Act, 1987. Answer three simple questions, add your district, and download a ready application for your DLSA office.",
+          "Claim free legal aid anywhere in India under the Legal Services Authorities Act, 1987. Scan your Aadhaar card or answer a few simple questions, and take the filled official application form to your DLSA office.",
       },
-      { property: "og:title", content: "LegalAid India — Free Legal Aid Eligibility Check" },
+      { property: "og:title", content: "LegalAid India — Claim Free Legal Aid" },
       {
         property: "og:description",
-        content: "Three simple questions to check your free legal aid eligibility anywhere in India — then download your application.",
+        content: "Scan your Aadhaar card or answer a few simple questions — we fill the official legal aid application form with you.",
       },
     ],
   }),
@@ -28,8 +28,8 @@ function Welcome() {
   const navigate = useNavigate();
 
   const how = [
-    { icon: ClipboardCheck, text: t("how1") },
-    { icon: MapPin, text: t("how2") },
+    { icon: ScanLine, text: t("how1") },
+    { icon: ClipboardCheck, text: t("how2") },
     { icon: FileDown, text: t("how3") },
   ];
 
@@ -67,7 +67,7 @@ function Welcome() {
         <button
           type="button"
           onClick={() => navigate({ to: "/eligibility" })}
-          className="tactile-button mt-7 flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-lg font-bold text-primary-foreground hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+          className="tactile-button mt-7 flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-lg font-bold text-primary-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
           {t("beginCheck")}
           <ArrowRight className="h-5 w-5" aria-hidden="true" />

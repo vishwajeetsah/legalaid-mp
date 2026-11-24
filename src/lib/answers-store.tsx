@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Answers } from "@/lib/eligibility";
 
-const STORAGE_KEY = "legalaid-answers-v2";
+const STORAGE_KEY = "legalaid-answers-v3";
 
 const initial: Answers = {
   stateCode: "",
@@ -14,6 +14,15 @@ const initial: Answers = {
   fatherName: "",
   address: "",
   phone: "",
+  gender: "",
+  dob: "",
+  oppositeParty: "",
+  oppositeUnknown: false,
+  relief: "",
+  previousApplication: false,
+  casePending: false,
+  incomeUncertain: false,
+  scanUsed: false,
 };
 
 type Ctx = {

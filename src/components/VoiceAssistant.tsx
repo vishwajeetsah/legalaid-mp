@@ -93,7 +93,7 @@ export function VoiceAssistant() {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-label={t("voiceTitle")}
-        className="voice-pulse flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition duration-200 hover:scale-105 hover:bg-primary/90 active:scale-95"
+        className="voice-pulse flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition duration-200 hover:scale-105 hover:bg-accent hover:text-accent-foreground active:scale-95"
       >
         <MessageCircle className="h-6 w-6" aria-hidden="true" />
       </button>

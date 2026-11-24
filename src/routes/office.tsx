@@ -95,7 +95,7 @@ function OfficeFinder() {
           href={mapsUrl}
           target="_blank"
           rel="noreferrer"
-          className="tactile-button mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-lg font-bold text-primary-foreground hover:bg-primary/90"
+          className="tactile-button mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-lg font-bold text-primary-foreground hover:bg-accent hover:text-accent-foreground"
         >
           <MapPin className="h-5 w-5" aria-hidden="true" /> {t("openMaps")}
         </a>

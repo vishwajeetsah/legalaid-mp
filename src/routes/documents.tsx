@@ -45,13 +45,32 @@ function Documents() {
   const district = findDistrict(state, answers.district);
   const sagarOfficeId = answers.district === SAGAR_DISTRICT_CODE ? SAGAR_TALUK_OFFICE[answers.taluk.toLowerCase()] : undefined;
   const office = sagarOfficeId ? OFFICES[sagarOfficeId] : undefined;
-  const officeLine = office
-    ? `${b(office.name)}, ${b(office.address)}`
+  const officeName = office
+    ? b(office.name)
     : district
-      ? `District Legal Services Authority (DLSA), ${district.name}, ${state?.name ?? ""}`
+      ? lang === "hi"
+        ? `जिला विधिक सेवा प्राधिकरण (डीएलएसए), ${district.name}`
+        : `District Legal Services Authority (DLSA), ${district.name}`
       : "";
+  const officeAddress = office
+    ? b(office.address)
+    : district
+      ? lang === "hi"
+        ? `जिला एवं सत्र न्यायालय परिसर, ${district.name} (${state?.name ?? ""})`
+        : `District & Sessions Court Premises, ${district.name} (${state?.name ?? ""})`
+      : "";
+  const matchedCategories = RULES.categories.filter((c) => answers.categories.includes(c.id));
+  const incomeClaimed = matchedCategories.length === 0 && (answers.incomeUnderCap === true || answers.incomeUncertain);
+  const incomeValue = matchedCategories.length
+    ? `${t("f7NA")} ${verdict.sections.join(", ")}`
+    : answers.incomeUnderCap
+      ? t("f7Below")
+      : answers.incomeUncertain
+        ? t("f7Confirm")
+        : t("f7Above");
   const dispute = DISPUTES.find((d) => d.id === answers.dispute);
   const blank = t("notFilled");
+  const reliefValue = answers.relief === "advice" ? t("f9Advice") : answers.relief === "file-case" ? t("f9File") : blank;
 
   const phoneValid = /^[6-9]\d{9}$/.test(answers.phone.replace(/[\s-]/g, ""));
   const errors = {
@@ -152,10 +171,24 @@ function Documents() {
         </button>
       </section>
 
+      <section className="card-enter mt-6 rounded-lg border border-border bg-card p-6 shadow-sm [animation-delay:140ms] print:hidden">
+        <h2 className="font-serif text-xl font-bold text-primary">{t("nextStepsTitle")}</h2>
+        <ol className="mt-4 space-y-4">
+          {[t("nextStep1"), t("nextStep2"), t("nextStep3"), t("nextStep4")].map((s, i) => (
+            <li key={i} className="flex items-start gap-3">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary font-bold text-primary-foreground">
+                {i + 1}
+              </span>
+              <p className="pt-1 text-base">{s}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
       <div className="mt-6">
         <Link
           to="/office"
-          className="tactile-button inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-4 font-bold text-primary-foreground hover:bg-primary/90"
+          className="tactile-button inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-4 font-bold text-primary-foreground hover:bg-accent hover:text-accent-foreground"
         >
           {t("toOffice")} <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>
@@ -172,83 +205,81 @@ function Documents() {
             </div>
 
             <div className="print-area px-6 py-6 text-[15px] text-black">
-              <p className="text-center text-sm font-semibold">
-                {lang === "hi"
-                  ? `जिला विधिक सेवा प्राधिकरण, ${district?.name ?? ""} (${state?.name ?? ""})`
-                  : `District Legal Services Authority, ${district?.name ?? ""} (${state?.name ?? ""})`}
-              </p>
-              <h3 className="mt-1 text-center font-serif text-lg font-bold">{t("formTitle")}</h3>
-              <p className="mt-1 text-center text-xs">
-                {lang === "hi" ? "(विधिक सेवा प्राधिकरण अधिनियम, 1987 की धारा 12 के अंतर्गत)" : "(Under Section 12 of the Legal Services Authorities Act, 1987)"}
-              </p>
+              <h3 className="text-center font-serif text-xl font-bold">{t("formAppTitle")}</h3>
+              <p className="mt-1 text-center text-sm">{t("formUnderAct")}</p>
+
+              <div className="mt-6">
+                <p>{t("formTo")}</p>
+                <p className="font-semibold">
+                  {t("formSecretary")}, {district?.name ?? ""} ({state?.name ?? ""})
+                </p>
+              </div>
 
               <dl className="mt-5 space-y-3">
-                <Row n="1" label={lang === "hi" ? "आवेदक का नाम" : "Name of applicant"} value={answers.applicantName || blank} />
-                <Row n="2" label={lang === "hi" ? "पिता / पति का नाम" : "Father's / Husband's name"} value={answers.fatherName || blank} />
-                <Row n="3" label={lang === "hi" ? "पता" : "Address"} value={answers.address || blank} />
-                <Row n="4" label={lang === "hi" ? "मोबाइल नंबर" : "Mobile number"} value={answers.phone || blank} />
+                <Row n="1" label={t("nameLabel")} value={answers.applicantName || blank} />
+                <Row n="2" label={t("fatherLabel")} value={answers.fatherName || blank} />
                 <Row
-                  n="5"
-                  label={lang === "hi" ? "राज्य / जिला / तालुका" : "State / District / Taluk"}
-                  value={`${state?.name ?? blank} / ${district?.name ?? blank} / ${answers.taluk || blank}`}
+                  n="3"
+                  label={t("f3Label")}
+                  value={`${answers.address || blank}${answers.phone ? `, ${t("phoneLabel")}: ${answers.phone}` : ""}`}
                 />
+                <div className="grid grid-cols-[1.6rem_10rem_1fr] gap-2 border-b border-dashed border-neutral-300 pb-2">
+                  <dt className="font-semibold">4.</dt>
+                  <dt className="font-semibold">{t("f4Label")}</dt>
+                  <dd>
+                    <ul className="space-y-1">
+                      {RULES.categories.map((c) => (
+                        <li key={c.id}>
+                          {answers.categories.includes(c.id) ? "\u2611" : "\u2610"} {b(c.label)} ({c.section})
+                        </li>
+                      ))}
+                      <li>
+                        {incomeClaimed ? "\u2611" : "\u2610"} {t("f4Income")}
+                      </li>
+                    </ul>
+                  </dd>
+                </div>
+                <Row n="5" label={t("f5Label")} value={officeName ? `${officeName}, ${officeAddress}` : blank} />
+                <Row n="6" label={t("f6Label")} value={t("f6Value")} />
+                <Row n="7" label={t("f7Label")} value={incomeValue} />
                 <Row
-                  n="6"
-                  label={lang === "hi" ? "श्रेणी" : "Category claimed"}
-                  value={
-                    answers.categories.length
-                      ? RULES.categories
-                          .filter((c) => answers.categories.includes(c.id))
-                          .map((c) => `${b(c.label)} (${c.section})`)
-                          .join(", ")
-                      : lang === "hi"
-                        ? "सामान्य — आय आधारित"
-                        : "General — income based"
-                  }
+                  n="8"
+                  label={t("f8Label")}
+                  value={answers.oppositeUnknown || !answers.oppositeParty.trim() ? t("f8Unknown") : answers.oppositeParty}
                 />
-                <Row
-                  n="7"
-                  label={lang === "hi" ? "वार्षिक पारिवारिक आय" : "Annual family income"}
-                  value={
-                    answers.categories.length
-                      ? lang === "hi"
-                        ? "लागू नहीं (धारा 12 श्रेणी)"
-                        : "Not applicable (Section 12 category)"
-                      : answers.incomeUnderCap
-                        ? lang === "hi"
-                          ? "राज्य सरकार द्वारा निर्धारित सीमा से कम"
-                          : "Below the limit prescribed by the State Government"
-                        : lang === "hi"
-                          ? "राज्य सरकार द्वारा निर्धारित सीमा से अधिक"
-                          : "Above the limit prescribed by the State Government"
-                  }
-                />
-                <Row n="8" label={lang === "hi" ? "विवाद का प्रकार" : "Nature of dispute"} value={dispute ? b(dispute.label) : blank} />
-                <Row n="9" label={lang === "hi" ? "प्रस्तुत करने का कार्यालय" : "Office of submission"} value={officeLine || blank} />
-                <Row
-                  n="10"
-                  label={lang === "hi" ? "पात्रता का आधार" : "Basis of eligibility"}
-                  value={verdict.reasons.map(b).join(" ")}
-                />
-                <Row
-                  n="11"
-                  label={t("docsEnclosed")}
-                  value={checked.length ? checked.map((id) => b(DOCUMENTS[id]!)).join(", ") : blank}
-                />
+                <Row n="9" label={t("f9Label")} value={reliefValue} />
+                <Row n="10" label={t("f10Label")} value={dispute ? dispute.label.en : blank} />
+                <Row n="11" label={t("f11Label")} value={answers.previousApplication ? t("yesGeneric") : t("noGeneric")} />
+                <Row n="12" label={t("f12Label")} value={answers.casePending ? t("yesGeneric") : t("noGeneric")} />
               </dl>
 
-              <p className="mt-4 rounded border border-dashed border-neutral-400 bg-neutral-50 px-3 py-2 text-sm italic">
-                {t("docsVerificationNote")}
+              <p className="mt-4 text-sm">
+                <span className="font-semibold">{t("docsEnclosed")}:</span>{" "}
+                {checked.length ? checked.map((id) => b(DOCUMENTS[id]!)).join(", ") : blank}
               </p>
 
-              <p className="mt-6 text-sm">
-                {lang === "hi"
-                  ? "मैं घोषणा करता/करती हूँ कि उपरोक्त विवरण मेरी जानकारी के अनुसार सत्य है।"
-                  : "I declare that the particulars given above are true to the best of my knowledge."}
-              </p>
-              <div className="mt-10 flex justify-between text-sm">
-                <span>{lang === "hi" ? "दिनांक: ____________" : "Date: ____________"}</span>
-                <span>{lang === "hi" ? "आवेदक के हस्ताक्षर / अंगूठा निशान" : "Signature / Thumb impression of applicant"}</span>
+              <p className="mt-6 text-sm leading-relaxed">{t("formUndertaking")}</p>
+
+              <div className="mt-10 flex flex-wrap justify-between gap-4 text-sm">
+                <span>
+                  {t("formPlace")}: ____________&nbsp;&nbsp;{t("formDate")}: ____________
+                </span>
+                <span>{t("formSignatureApplicant")}: ____________</span>
+              </div>
+
+              <div className="mt-10 border border-neutral-800 p-4">
+                <p className="text-center font-serif font-bold">{t("counselTitle")}</p>
+                <p className="mt-4 text-sm font-semibold">1. {t("counselSummary")}:</p>
+                <div className="mt-6 space-y-6">
+                  <div className="border-b border-neutral-400" />
+                  <div className="border-b border-neutral-400" />
+                </div>
+                <p className="mt-6 text-sm font-semibold">2. {t("counselRecommendation")}:</p>
+                <div className="mt-6 space-y-6">
+                  <div className="border-b border-neutral-400" />
+                  <div className="border-b border-neutral-400" />
+                </div>
+                <p className="mt-10 text-right text-sm">{t("counselSignature")}</p>
               </div>
 
               <div className="mt-10 border-t border-neutral-300 pt-3 text-center text-xs text-neutral-600">
@@ -276,7 +307,7 @@ function Documents() {
               <button
                 type="button"
                 onClick={() => window.print()}
-                className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2 font-bold text-primary-foreground hover:bg-primary/90"
+                className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2 font-bold text-primary-foreground hover:bg-accent hover:text-accent-foreground"
               >
                 <Printer className="h-4 w-4" aria-hidden="true" /> {t("print")}
               </button>
